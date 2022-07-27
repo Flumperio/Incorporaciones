@@ -19,6 +19,29 @@
 #include "../includes/incor.h"
 #include <string.h>
 
+int	ft_islower(int chr)
+{
+	return (chr >= 97 && chr <= 122);
+}
+
+int	ft_isupper(int chr)
+{
+	return (chr >= 65 && chr <= 90);
+}
+
+int	ft_tolower(int chr) {
+	if (ft_isupper(chr) == 1)
+		return (chr + 32);
+	return (chr);
+}
+
+int	ft_toupper(int chr)
+{
+	if (ft_islower(chr) == 1)
+		return (chr - 32);
+	return (chr);
+}
+
 char	**read_line(t_main *main, char splt)
 {
 	char	**ret_split;
@@ -50,13 +73,83 @@ void	open_file(t_main *main)
 	printf("FD: %i\n", main->file_fd);
 }
 
-void	write_file(t_main *main)
+void	write_char(char *str1, const char *separator, t_main *main)
 {
 	int		n_bits;
 
-	n_bits = strlen("Cuenta");
-	printf("FD-1: %i\n", main->file_fd);
-	write(main->file_fd, "Cuenta", n_bits);
+	n_bits = 0;
+	n_bits = (int)strlen(str1);
+	write(main->file_fd, str1, n_bits);
+	write(main->file_fd, separator, 1);
+}
+
+void	write_file(t_main *main)
+{
+	int		cnt;
+	int 	tmp;
+
+	cnt = -1;
+	tmp = 0;
+	write_char("CUENTAS\nNombre Completo (Correo):", "\n", main);
+	while(main->nombre[++cnt] != 0)
+		write_char(main->nombre[cnt], " ", main);
+	write(main->file_fd, "\n", 1);
+	write_char("Departamento:", "\n", main);
+	write_char(main->cargo, "\n", main);
+	write(main->file_fd, "\n", 1);
+	write_char("Correo Electrónico", "\n", main);
+	write_char("Usuario:", "\t", main);
+	write_char(main->email, "@", main);
+	write_char("lpsingenieria.com", "\n", main);
+	write_char("Contraseña:", "\t", main);
+	write_char(main->email_pass, "\n", main);
+	write(main->file_fd, "\n", 1);
+	write_char("VPN", "\n", main);
+	write_char("Usuario:", "\t", main);
+	tmp = ft_tolower(main->nombre[0][0]);
+	main->nombre[1][0] = (char)ft_tolower(main->nombre[1][0]);
+	write(main->file_fd, &tmp, 1);
+	write(main->file_fd, main->nombre[1], (int)strlen(main->nombre[1]));
+	write(main->file_fd, "\n", 1);
+	write_char("Contraseña:", "\t", main);
+	write(main->file_fd, "LPS", 3);
+	write(main->file_fd, main->nombre[0], 1);
+	write(main->file_fd, main->nombre[1], 3);
+	write_char("2022", "\n", main);
+	write(main->file_fd, "\n", 1);
+	write_char("Servidor", "\n", main);
+	write_char("Usuario:", "\t", main);
+	write_char(main->email, "@", main);
+	write_char("LPS.local", "\n", main);
+	tmp = ft_tolower(main->nombre[0][0]);
+	write_char("Contraseña:", "\t", main);
+	write(main->file_fd, "LPS", 3);
+	write(main->file_fd, main->nombre[0], 1);
+	write(main->file_fd, main->nombre[1], 3);
+	write_char("2022", "\n", main);
+	write(main->file_fd, "\n", 1);
+	write_char("Skype", "\n", main);
+	write_char("Usuario:", "\t", main);
+	write_char(main->email, "@", main);
+	write_char("lpsingenieria.com", "\n", main);
+	write_char("Contraseña:", "\t", main);
+	write_char("LPS_ingenieria2022", "\n", main);
+	write_char("Nombre:", "\t", main);
+	write(main->file_fd, "\t", 1);
+	write_char("LPS_", "", main);
+	write_char(main->nombre[0], "", main);
+	write_char("_", "", main);
+	main->nombre[1][0] = (char)ft_toupper(main->nombre[1][0]);
+	write_char(main->nombre[1], "\n", main);
+	write(main->file_fd, "\n", 1);
+	write_char("Servidor", "\n", main);
+	write_char("Usuario:", "\t", main);
+	write_char(main->email, "\n", main);
+	write_char("Contraseña:", "\t", main);
+	write_char("LPS_ingenieria2022", "\n", main);
+	write(main->file_fd, "\n", 1);
+	write_char("Nombre de Equipo:", "\n", main);
+	write_char("LPSXXX", "\n", main);
 	close(main->file_fd);
 
 
@@ -72,7 +165,7 @@ int		main()
 	main = fn_init_main(main);
 	main->nombre = read_line(main, ' ');
 	main->cargo = readline("\033[36mCargo:\\> \033[m");
-	main->email = readline("\033[36meMail:\\> \033[m");
+	main->email = readline("\033[36mCuenta_Servidor:\\> \033[m");
 	main->email_pass = readline("\033[36mPass_eMail:\\> \033[m");
 	open_file(main);
 	write_file(main);
