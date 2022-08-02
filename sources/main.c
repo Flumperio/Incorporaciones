@@ -142,7 +142,7 @@ void	write_file(t_main *main)
 	main->nombre[1][0] = (char)ft_toupper(main->nombre[1][0]);
 	write_char(main->nombre[1], "\n", main);
 	write(main->file_fd, "\n", 1);
-	write_char("Servidor", "\n", main);
+	write_char("Equipo", "\n", main);
 	write_char("Usuario:", "\t", main);
 	write_char(main->email, "\n", main);
 	write_char("Contraseña:", "\t", main);
