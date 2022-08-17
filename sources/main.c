@@ -115,7 +115,7 @@ void	write_file(t_main *main)
 	write(main->file_fd, "LPS", 3);
 	write(main->file_fd, main->nombre[0], 1);
 	write(main->file_fd, main->nombre[1], 3);
-	write_char("2022", "\n", main);
+	write_char(".2022", "\n", main);
 	write(main->file_fd, "\n", 1);
 	write_char("Servidor", "\n", main);
 	write_char("Usuario:", "\t", main);
@@ -126,7 +126,7 @@ void	write_file(t_main *main)
 	write(main->file_fd, "LPS", 3);
 	write(main->file_fd, main->nombre[0], 1);
 	write(main->file_fd, main->nombre[1], 3);
-	write_char("2022", "\n", main);
+	write_char(".2022", "\n", main);
 	write(main->file_fd, "\n", 1);
 	write_char("Skype", "\n", main);
 	write_char("Usuario:", "\t", main);
