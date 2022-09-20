@@ -54,7 +54,7 @@ char *join(const char* s1, const char* s2)
 {
     char* result = malloc(strlen(s1) + strlen(s2) + 1);
 
-    if (result) // thanks @pmg
+    if (result)
     {
         strcpy(result, s1);
         strcat(result, s2);
