@@ -136,9 +136,8 @@ void	write_file(t_main *main)
 	write_char("LPS_ingenieria2022", "\n", main);
 	write_char("Nombre:", "\t", main);
 	write(main->file_fd, "\t", 1);
-	write_char("LPS_", "", main);
-	write_char(main->nombre[0], "", main);
-	write_char("_", "", main);
+	write_char("LPS", "_", main);
+	write_char(main->nombre[0], "_", main);
 	main->nombre[1][0] = (char)ft_toupper(main->nombre[1][0]);
 	write_char(main->nombre[1], "\n", main);
 	write(main->file_fd, "\n", 1);
